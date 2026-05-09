@@ -9,7 +9,7 @@ import ThemedView from '@/presentation/shared/ThemedView';
 import ThemedText from '@/presentation/shared/ThemedText';
 import '../global.css';
 
-const ComponentApp = () => {
+const ComponentsApp = () => {
     const colorScheme = useColorScheme();
     //const backgroundColor = useThemeColor({ light: 'red', dark: 'blue' }, 'background');
     const backgroundColor = useThemeColor({}, 'background');
@@ -30,4 +30,4 @@ const ComponentApp = () => {
     );
 };
 
-export default ComponentApp;
+export default ComponentsApp;
