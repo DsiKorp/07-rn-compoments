@@ -1,12 +1,16 @@
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { View } from 'react-native';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 //import 'react-native-reanimated';
+import {
+    animationMenuRoutes,
+    menuRoutes,
+    uiMenuRoutes,
+} from '@/constants/Routes';
 import { useThemeColor } from '@/hooks/use-theme-color';
 import ThemedView from '@/presentation/shared/ThemedView';
 
-import ThemedText from '@/presentation/shared/ThemedText';
+import MenuItem from '@/presentation/menu/MenuItem';
 import '../global.css';
 
 const ComponentsApp = () => {
@@ -14,19 +18,45 @@ const ComponentsApp = () => {
     //const backgroundColor = useThemeColor({ light: 'red', dark: 'blue' }, 'background');
     const backgroundColor = useThemeColor({}, 'background');
 
-
     return (
-        <GestureHandlerRootView
-            style={{ backgroundColor: backgroundColor, flex: 1 }}
-        >
-            <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-                <ThemedView margin>
-                    <ThemedText type='h1' className='mt-20'>
-                        Welcome to Nativewind!
-                    </ThemedText>
-                </ThemedView>
-            </ThemeProvider>
-        </GestureHandlerRootView>
+        <ThemedView margin>
+            {animationMenuRoutes.map((route, index) => (
+                <MenuItem
+                    key={route.title}
+                    title={route.title}
+                    icon={route.icon}
+                    name={route.name}
+                    isFirst={index === 0}
+                    isLast={index === animationMenuRoutes.length - 1}
+                />
+            ))}
+
+            <View className="my-3" />
+
+            {uiMenuRoutes.map((route, index) => (
+                <MenuItem
+                    key={route.title}
+                    title={route.title}
+                    icon={route.icon}
+                    name={route.name}
+                    isFirst={index === 0}
+                    isLast={index === uiMenuRoutes.length - 1}
+                />
+            ))}
+
+            <View className="my-3" />
+
+            {menuRoutes.map((route, index) => (
+                <MenuItem
+                    key={route.title}
+                    title={route.title}
+                    icon={route.icon}
+                    name={route.name}
+                    isFirst={index === 0}
+                    isLast={index === menuRoutes.length - 1}
+                />
+            ))}
+        </ThemedView>
     );
 };
 
