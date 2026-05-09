@@ -1,27 +1,30 @@
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import { Text, View } from 'react-native';
-
+import { useColorScheme } from '@/hooks/use-color-scheme';
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 //import 'react-native-reanimated';
 import { useThemeColor } from '@/hooks/use-theme-color';
+import ThemedView from '@/presentation/shared/ThemedView';
+
+import ThemedText from '@/presentation/shared/ThemedText';
 import '../global.css';
 
 const ComponentApp = () => {
     const colorScheme = useColorScheme();
+    //const backgroundColor = useThemeColor({ light: 'red', dark: 'blue' }, 'background');
     const backgroundColor = useThemeColor({}, 'background');
+
 
     return (
         <GestureHandlerRootView
             style={{ backgroundColor: backgroundColor, flex: 1 }}
         >
             <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-                <View className="flex-1 items-center justify-center bg-white dark:bg-black">
-                    <Text className="mt-10 text-3xl text-light-primary dark:text-dark-primary">
+                <ThemedView margin>
+                    <ThemedText type='h1' className='mt-20'>
                         Welcome to Nativewind!
-                    </Text>
-                </View>
+                    </ThemedText>
+                </ThemedView>
             </ThemeProvider>
         </GestureHandlerRootView>
     );
